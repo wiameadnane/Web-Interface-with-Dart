@@ -1,0 +1,486 @@
+% Language setting
+\documentclass{article}
+
+% Packages
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue, breaklinks=true]{hyperref}
+\usepackage{titlesec}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% Code listing style
+\lstdefinestyle{dartcode}{
+    language=C++,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    backgroundcolor=\color{gray!10}
+}
+
+\begin{document}
+
+\begin{titlepage}
+    % Top logos
+    \begin{center}
+        \begin{minipage}{0.45\textwidth}
+            \includegraphics[height=1.5cm]{Logo_Université_Euromed_de_Fés.png}
+        \end{minipage}%
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \begin{flushright}
+                \includegraphics[height=2.1cm]{Img_EIDIA.png}
+            \end{flushright}
+        \end{minipage}
+    \end{center}
+
+    % University info
+    \vspace*{-2.3cm}
+    \begin{center}
+        {\small
+        Royaume du Maroc \\[0.1cm]
+        \textbf{Université Euro Méditerranéenne de Fés} \\
+        école d'Ingénierie Digitale et d'Intelligence Artificielle} \\[0.5cm]
+
+        \rule{\textwidth}{0.4mm} \\[3.5cm]
+
+        % Title
+        {\Huge \textbf{Compte Rendu}} \\[1.5cm]
+
+        % Project info
+        \Large\textbf{Filière} : Ingénierie en Intelligence Artificielle \\[0.2cm]
+        \Large\textbf{Module} : Développement Mobile Android \\[3cm]
+
+        \rule{\textwidth}{0.4mm} \\[0.7cm]
+        {\huge \textbf{Système de Gestion Universitaire}} \\[0.3cm]
+        {\Large Interface Web avec Dart} \\[0.5cm]
+        \rule{\textwidth}{0.4mm}  \\[0.02cm]
+
+    \end{center}
+
+    % Supervisor & authors
+    \vspace{1.5cm}
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+        \large \textbf{Professeur :} \\[0.3cm]
+         ALAMI MERROUNI Zakariae \\
+
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.25\textwidth}
+        \large \textbf{Préparé par :} \\[0.3cm]
+        Wiame Adnane \\[0.1cm]
+    \end{minipage}
+
+    % Date
+    \vspace{2cm}
+    \begin{center}
+        \large \textbf{Date :} \today \\[0.2cm]
+        \large \textbf{Année Universitaire :} 2024 - 2025
+    \end{center}
+
+\end{titlepage}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[L]{EIDIA}
+\fancyfoot[R]{UEMF}
+
+\fancypagestyle{Table of content}{
+    \fancyhf{}
+    \fancyhead[R]{Table des matières}
+    \fancyfoot[C]{\thepage}
+    \fancyfoot[L]{EIDIA}
+    \fancyfoot[R]{UEMF}
+}
+
+% Table of contents
+\clearpage
+\thispagestyle{Table of content}
+\renewcommand{\contentsname}{\normalsize Table des matières} \\
+\tableofcontents
+
+% Introduction
+\clearpage
+\section{Introduction}
+
+Ce projet consiste en la réalisation d'un système de gestion universitaire complet, développé avec le langage Dart. L'application permet de gérer les professeurs, les étudiants, les cours et les inscriptions avec des opérations CRUD complètes et des mises à jour en temps réel via WebSocket.
+
+\subsection{Objectifs}
+
+\begin{itemize}
+    \item Développer une interface web moderne et responsive
+    \item Implémenter des opérations CRUD sur toutes les entités
+    \item Assurer la communication en temps réel entre serveur et clients
+    \item Gérer les relations entre entités avec PostgreSQL
+    \item Créer une architecture client-serveur robuste
+\end{itemize}
+
+% Technologies
+\clearpage
+\section{Technologies Utilisées}
+
+\subsection{Backend}
+
+\begin{itemize}
+    \item \textbf{Dart} - Langage de programmation pour le serveur
+    \item \textbf{Shelf} - Framework HTTP pour le serveur web
+    \item \textbf{Shelf Router} - Définition des routes API
+    \item \textbf{Shelf WebSocket} - Communication bidirectionnelle temps réel
+    \item \textbf{PostgreSQL} - Base de données relationnelle hébergée sur Neon
+\end{itemize}
+
+\subsection{Frontend}
+
+\begin{itemize}
+    \item \textbf{HTML5} - Structure de la page web
+    \item \textbf{CSS3} - Design responsive avec animations modernes
+    \item \textbf{Dart (compilé en JavaScript)} - Logique client-side
+\end{itemize}
+
+% Architecture
+\clearpage
+\section{Architecture du Système}
+
+\subsection{Architecture Générale}
+
+L'application suit une architecture client-serveur en trois couches :
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.8\textwidth}{\centering \textit{[PLACEHOLDER: Diagramme d'architecture]}\\ \vspace{2cm}}}
+    \caption{Architecture générale du système}
+\end{figure}
+
+\subsubsection{Couche Client}
+Interface web (HTML/CSS/Dart compilé) avec client WebSocket pour mises à jour temps réel.
+
+\subsubsection{Couche Serveur}
+Serveur Dart avec Shelf offrant une API RESTful et un serveur WebSocket.
+
+\subsubsection{Couche Base de Données}
+PostgreSQL sur Neon avec schéma relationnel et contraintes d'intégrité.
+
+\subsection{Schéma de Base de Données}
+
+\textbf{Tables principales :}
+
+\begin{itemize}
+    \item \textbf{Professors} : id, name, email (unique), department
+    \item \textbf{Students} : id, name, email (unique), stream, enrollment\_year
+    \item \textbf{Lectures} : id, title, description, professor\_id (FK), schedule, room
+    \item \textbf{Enrollments} : id, student\_id (FK), lecture\_id (FK), enrolled\_at
+\end{itemize}
+
+\textbf{Relations :}
+\begin{itemize}
+    \item Un professeur peut enseigner plusieurs cours (1:N)
+    \item Un étudiant peut s'inscrire à plusieurs cours (N:M via enrollments)
+    \item Un cours a un seul professeur (N:1)
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.9\textwidth}{\centering \textit{[PLACEHOLDER: Diagramme des relations]}\\ \vspace{2cm}}}
+    \caption{Relations entre les tables}
+\end{figure}
+
+% Fonctionnalités
+\clearpage
+\section{Fonctionnalités Implémentées}
+
+\subsection{Opérations CRUD}
+
+Chaque entité (Professeurs, Étudiants, Cours, Inscriptions) dispose de :
+
+\begin{itemize}
+    \item \textbf{Create} - Formulaire d'ajout avec validation
+    \item \textbf{Read} - Affichage en tableau avec toutes les données
+    \item \textbf{Update} - Édition avec pré-remplissage du formulaire
+    \item \textbf{Delete} - Suppression avec confirmation
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.9\textwidth}{\centering \textit{[PLACEHOLDER: Interface de gestion]}\\ \vspace{3cm}}}
+    \caption{Interface de gestion des entités}
+\end{figure}
+
+\subsection{Fonctionnalités Temps Réel}
+
+\subsubsection{WebSocket}
+Communication bidirectionnelle permettant :
+\begin{itemize}
+    \item Diffusion automatique des changements à tous les clients
+    \item Mise à jour instantanée des tableaux
+    \item Synchronisation multi-onglets
+\end{itemize}
+
+\subsubsection{Événements diffusés}
+\texttt{student\_created}, \texttt{student\_updated}, \texttt{student\_deleted}, \texttt{professor\_*}, \texttt{lecture\_*}, \texttt{enrollment\_*}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.9\textwidth}{\centering \textit{[PLACEHOLDER: Synchronisation temps réel]}\\ \vspace{2.5cm}}}
+    \caption{Démonstration synchronisation temps réel}
+\end{figure}
+
+\subsection{Interface Utilisateur}
+
+\begin{itemize}
+    \item Navigation par onglets (Students, Professors, Lectures, Enrollments)
+    \item Design moderne avec dégradés et animations
+    \item Indicateur de connexion WebSocket (vert/rouge)
+    \item Notifications de succès/erreur
+    \item Responsive design (desktop/tablette/mobile)
+\end{itemize}
+
+% Implémentation
+\clearpage
+\section{Détails d'Implémentation}
+
+\subsection{API REST}
+
+\textbf{Endpoints principaux :}
+\begin{itemize}
+    \item \texttt{GET/POST/PUT/DELETE /api/professors}
+    \item \texttt{GET/POST/PUT/DELETE /api/students}
+    \item \texttt{GET/POST/PUT/DELETE /api/lectures}
+    \item \texttt{GET/POST/DELETE /api/enrollments}
+    \item \texttt{WS /ws} - WebSocket pour temps réel
+\end{itemize}
+
+\subsection{Exemple de Code}
+
+\begin{lstlisting}[style=dartcode, caption=Création d'un étudiant (Backend)]
+static Future<Map<String, dynamic>> createStudent(
+  String name, String email, String stream, int enrollmentYear
+) async {
+  final conn = await getConnection();
+  final result = await conn.execute(
+    Sql.named('''
+      INSERT INTO students (name, email, stream, enrollment_year)
+      VALUES (@name, @email, @stream, @year)
+      RETURNING id, name, email, stream, enrollment_year
+    '''),
+    parameters: {
+      'name': name, 'email': email,
+      'stream': stream, 'year': enrollmentYear,
+    },
+  );
+  return {
+    'id': result[0][0], 'name': result[0][1],
+    'email': result[0][2], 'stream': result[0][3],
+    'enrollment_year': result[0][4],
+  };
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=dartcode, caption=Diffusion WebSocket]
+void broadcastUpdate(String type, dynamic data) {
+  final message = json.encode({
+    'type': type, 'data': data,
+    'timestamp': DateTime.now().toIso8601String(),
+  });
+  for (var client in _connectedClients) {
+    client.sink.add(message);
+  }
+}
+\end{lstlisting}
+
+% Tests
+\clearpage
+\section{Tests et Validation}
+
+\subsection{Scénarios de Test}
+
+\begin{enumerate}
+    \item \textbf{CRUD Professeurs} - Ajout, modification, suppression avec vérification
+    \item \textbf{CRUD Étudiants} - Tests complets avec validation email unique
+    \item \textbf{Création Cours} - Vérification relation avec professeurs
+    \item \textbf{Inscriptions} - Test contrainte unicité (étudiant + cours)
+    \item \textbf{Temps Réel} - Synchronisation multi-onglets validée
+\end{enumerate}
+
+\subsection{Validation des Contraintes}
+
+\begin{itemize}
+    \item \textbf{Unicité} - Emails professeurs/étudiants uniques
+    \item \textbf{Clés étrangères} - Cascade delete vérifié
+    \item \textbf{Inscriptions} - Impossible de s'inscrire 2x au même cours
+\end{itemize}
+
+% Difficultés
+\clearpage
+\section{Difficultés Rencontrées et Solutions}
+
+\subsection{Compilation Dart vers JavaScript}
+
+\textbf{Problème :} \texttt{innerHTML} non supporté pour \texttt{TableRowElement}
+
+\textbf{Solution :} Création programmatique avec \texttt{TableCellElement} et \texttt{appendChild}
+
+\subsection{Événements onclick}
+
+\textbf{Problème :} Attributs HTML \texttt{onclick} ne fonctionnent pas après compilation
+
+\textbf{Solution :} Utilisation de \texttt{.onClick.listen()} en Dart
+
+\subsection{Mode Édition}
+
+\textbf{Problème :} Formulaire se réinitialisait lors de l'édition
+
+\textbf{Solution :} Séparation logique affichage/réinitialisation, manipulation directe du style
+
+\subsection{Connexion Base de Données}
+
+\textbf{Problème :} Timeout initial
+
+\textbf{Solution :} Correction chaîne de connexion avec paramètres SSL
+
+% Améliorations
+\clearpage
+\section{Améliorations Futures}
+
+\subsection{Sécurité}
+\begin{itemize}
+    \item Authentification JWT
+    \item Gestion rôles et permissions
+    \item HTTPS/TLS
+    \item Protection injections SQL
+\end{itemize}
+
+\subsection{Fonctionnalités}
+\begin{itemize}
+    \item Recherche et filtrage
+    \item Pagination
+    \item Export CSV/PDF
+    \item Gestion des notes
+    \item Calendrier académique
+\end{itemize}
+
+\subsection{Technique}
+\begin{itemize}
+    \item Tests unitaires
+    \item Documentation API Swagger
+    \item Containerisation Docker
+    \item Application mobile Flutter
+\end{itemize}
+
+% Conclusion
+\clearpage
+\section{Conclusion}
+
+\subsection{Récapitulatif}
+
+Ce projet a permis de développer un système complet de gestion universitaire implémentant :
+
+\begin{itemize}
+    \item CRUD complet pour quatre entités interconnectées
+    \item Communication temps réel via WebSocket
+    \item Interface utilisateur moderne et responsive
+    \item Architecture client-serveur robuste
+\end{itemize}
+
+\subsection{Compétences Acquises}
+
+\textbf{Techniques :} Développement Dart, API REST, WebSocket, PostgreSQL, compilation Dart-to-JS
+
+\textbf{Architecturales :} Architecture client-serveur, modélisation BDD relationnelle, contraintes d'intégrité
+
+\textbf{Méthodologiques :} Résolution problèmes, débogage, documentation
+
+\subsection{Perspectives}
+
+L'application constitue une base solide évolutive vers un système de gestion universitaire complet, plateforme d'apprentissage ou application mobile Flutter.
+
+\subsection{Remerciements}
+
+Je remercie le Professeur ALAMI MERROUNI Zakariae pour son encadrement ainsi que l'EIDIA pour les moyens mis à disposition.
+
+% Annexes
+\clearpage
+\section{Annexes}
+
+\subsection{Installation}
+
+\begin{lstlisting}[style=dartcode, caption=Installation et lancement]
+# Installation
+dart pub get
+
+# Configuration .env
+DATABASE_URL='postgresql://user:pass@host.neon.tech/db?sslmode=require'
+
+# Compilation frontend
+dart compile js web/main.dart -o web/main.dart.js
+
+# Lancement serveur
+dart run bin/server.dart
+\end{lstlisting}
+
+\subsection{Structure du Projet}
+
+\begin{verbatim}
+dart_app/
+├── bin/server.dart              # Serveur principal
+├── lib/services/
+│   ├── env_config.dart          # Configuration
+│   └── database_service.dart    # Opérations DB
+├── web/
+│   ├── index.html               # Interface
+│   ├── styles.css               # Styles
+│   ├── main.dart                # Client Dart
+│   └── main.dart.js             # Compilé
+├── .env                          # Variables d'environnement
+└── pubspec.yaml                  # Dépendances
+\end{verbatim}
+
+\subsection{Captures d'écran}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.9\textwidth}{\centering \textit{[PLACEHOLDER: Vue d'ensemble application]}\\ \vspace{3cm}}}
+    \caption{Vue d'ensemble de l'application}
+\end{figure}
+
+% Références
+\clearpage
+\begin{thebibliography}{9}
+
+\bibitem{dart}
+Google, \textit{Dart Programming Language Documentation}, \url{https://dart.dev}, 2024.
+
+\bibitem{shelf}
+Dart Team, \textit{Shelf - Web server middleware for Dart}, \url{https://pub.dev/packages/shelf}, 2024.
+
+\bibitem{postgres}
+PostgreSQL Global Development Group, \textit{PostgreSQL Documentation}, \url{https://www.postgresql.org}, 2024.
+
+\bibitem{websocket}
+W3C, \textit{The WebSocket API}, \url{https://html.spec.whatwg.org/multipage/web-sockets.html}, 2024.
+
+\bibitem{neon}
+Neon, \textit{Serverless Postgres}, \url{https://neon.tech}, 2024.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>University Management System</h1>
+            <div class="connection-status">
+                <span id="connection-indicator" class="indicator disconnected"></span>
+                <span id="connection-text">Disconnected</span>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="students">Students</button>
+            <button class="tab" data-tab="professors">Professors</button>
+            <button class="tab" data-tab="lectures">Lectures</button>
+            <button class="tab" data-tab="enrollments">Enrollments</button>
+        </nav>
+
+        <!-- Students Tab -->
+        <div id="students-tab" class="tab-content active">
+            <div class="section-header">
+                <h2>Students</h2>
+                <button id="add-student-btn" class="btn btn-primary">Add Student</button>
+            </div>
+
+            <div id="add-student-form" class="form-container" style="display: none;">
+                <h3>Add New Student</h3>
+                <form id="student-form">
+                    <input type="text" id="student-name" placeholder="Full Name" required>
+                    <input type="email" id="student-email" placeholder="Email" required>
+                    <input type="text" id="student-stream" placeholder="Stream/Program" required>
+                    <input type="number" id="student-year" placeholder="Enrollment Year" required min="2000" max="2100">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button id="cancel-student-btn" type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="students-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Stream</th>
+                            <th>Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-tbody">
+                        <tr>
+                            <td colspan="6" class="loading">Loading students...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Professors Tab -->
+        <div id="professors-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Professors</h2>
+                <button id="add-professor-btn" class="btn btn-primary">Add Professor</button>
+            </div>
+
+            <div id="add-professor-form" class="form-container" style="display: none;">
+                <h3>Add New Professor</h3>
+                <form id="professor-form">
+                    <input type="text" id="professor-name" placeholder="Full Name" required>
+                    <input type="email" id="professor-email" placeholder="Email" required>
+                    <input type="text" id="professor-department" placeholder="Department" required>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button id="cancel-professor-btn" type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="professors-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="professors-tbody">
+                        <tr>
+                            <td colspan="5" class="loading">Loading professors...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Lectures Tab -->
+        <div id="lectures-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Lectures</h2>
+                <button id="add-lecture-btn" class="btn btn-primary">Add Lecture</button>
+            </div>
+
+            <div id="add-lecture-form" class="form-container" style="display: none;">
+                <h3>Add New Lecture</h3>
+                <form id="lecture-form">
+                    <input type="text" id="lecture-title" placeholder="Title" required>
+                    <textarea id="lecture-description" placeholder="Description" required></textarea>
+                    <select id="lecture-professor" required>
+                        <option value="">Select Professor</option>
+                    </select>
+                    <input type="text" id="lecture-schedule" placeholder="Schedule (e.g., Mon/Wed 10:00-11:30)" required>
+                    <input type="text" id="lecture-room" placeholder="Room" required>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button id="cancel-lecture-btn" type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="lectures-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Professor</th>
+                            <th>Schedule</th>
+                            <th>Room</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lectures-tbody">
+                        <tr>
+                            <td colspan="6" class="loading">Loading lectures...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Enrollments Tab -->
+        <div id="enrollments-tab" class="tab-content">
+            <div class="section-header">
+                <h2>Student Enrollments</h2>
+                <button id="add-enrollment-btn" class="btn btn-primary">Add Enrollment</button>
+            </div>
+
+            <div id="add-enrollment-form" class="form-container" style="display: none;">
+                <h3>Enroll Student in Lecture</h3>
+                <form id="enrollment-form">
+                    <select id="enrollment-student" required>
+                        <option value="">Select Student</option>
+                    </select>
+                    <select id="enrollment-lecture" required>
+                        <option value="">Select Lecture</option>
+                    </select>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Enroll</button>
+                        <button id="cancel-enrollment-btn" type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="enrollments-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student</th>
+                            <th>Lecture</th>
+                            <th>Enrolled At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrollments-tbody">
+                        <tr>
+                            <td colspan="5" class="loading">Loading enrollments...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/dart" src="main.dart"></script>
+    <script src="main.dart.js"></script>
+</body>
+</html>

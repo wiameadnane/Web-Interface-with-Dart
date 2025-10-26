@@ -1,0 +1,27 @@
+# Environment variables (contains database credentials)
+.env
+
+# Dart build outputs
+build/
+.dart_tool/
+.packages
+pubspec.lock
+
+# Compiled JavaScript
+web/main.dart.js
+web/main.dart.js.deps
+web/main.dart.js.map
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
